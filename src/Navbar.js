@@ -1,34 +1,30 @@
-import {NavLink} from "react-router-dom"
+import { NavLink } from "react-router-dom";
+
 
 function Navbar() {
-
-  return(
+  return (
+    
     <body>
+      <head>
+      <script src="https://kit.fontawesome.com/36c8cccb8c.js" crossorigin="anonymous"></script></head>
+      <div class="sidenav">
+        <h2>MiniBox</h2>
+        <a>
+                  <NavLink to="/">Home</NavLink>
+        </a>
 
-    <div class="Navbar">
-     
+        <a>
+          <NavLink to="/profile">Profile</NavLink>
+        </a>
 
-<ul>
-  <h2>MiniBox</h2>
-  <li><NavLink  to="/">
-          Home
-        </NavLink></li>
-
-  <li><NavLink  to="/profile">
-          Profile
-        </NavLink></li>
-
-  <li><li><NavLink  to="/allfiles">
-          AllFiles
-        </NavLink></li></li>
-        
-  <li><a href="#contact">Admin Console</a></li>
-</ul>
-
-
+        <a>
+          <a>
+            <NavLink to="/allfiles">AllFiles</NavLink>
+          </a>
+        </a>
       </div>
     </body>
-    );
-  }
+  );
+}
 
-  export default Navbar;
+export default Navbar;

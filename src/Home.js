@@ -18,7 +18,7 @@ function Home() {
     <body>
 
     <div class="home">
-      <div class="Titles">
+      <div class="titles">
         <h1>
          MiniBox
         </h1>
