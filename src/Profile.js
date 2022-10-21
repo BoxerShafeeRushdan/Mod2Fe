@@ -1,43 +1,72 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 function Profile(props) {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
-    localStorage.setItem("currentUser", name);
-    // add localStorage.clear() to log out function
+  function refreshPage() {
+    window.location.reload(false);
+}
 
-    props.handleLogIn(name);
-  };
-  console.log(props.handleLogIn);
-
-  const handleOnChangeN = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleOnChangeP = (e) => {
-    setPassword(e.target.value);
+  const submitform = (e) => {
+    e.preventDefault();
+    axios
+      .post(`http://localhost:4000/api/users`, {
+        name: name,
+        password: password,
+      })
+      .then((response) => {
+        setError(response.data.error);
+        props.setUser(response.data.user);
+        if (response.data.user) {
+          refreshPage();
+        }
+        localStorage.setItem("userId", response.data.user.id);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Please sumbit your name & password</h2>
-      <label>
-        Name
-        <ul></ul>
-        <input type="text" value={name} onChange={handleOnChangeN} />
-      </label>
-      <ul></ul>
-    
-      <label>
-        Password
-        <ul></ul>
-        <input type="text" value={password} onChange={handleOnChangeP} />
-      </label>
-      <ul></ul>
-      <button type="submit"> Submit</button>
-    </form>
+    <div className="backgroundpic">
+      <div className="login">
+        <div class="login-container">
+          <form onSubmit={submitform}>
+            <h3>Login to your Account</h3>
+            <div className="input">
+              <input
+                placeholder="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+
+            <div className="input">
+              <input
+                placeholder="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <div className="input">
+              <button type="submit" value="Login!">
+                Login
+              </button>
+              <div class="welcome">
+                <h1>Welcome {name}</h1>
+              </div>
+            </div>
+          </form>
+
+          <p>{error}</p>
+        </div>
+      </div>
+    </div>
   );
 }
 

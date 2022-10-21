@@ -5,10 +5,30 @@ import Navbar from "./Navbar";
 import Profile from "./Profile";
 import AllFiles from "./AllFiles";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 
 function App() {
+  const [user, setUser] = useState(null);
 
-
+  const getUserInfo = async () => {
+    const userId = localStorage.getItem("userId");
+    try {
+      if (userId) {
+        const mainuser = await axios.get(
+          `http://localhost:4000/api/user/${userId}`
+        );
+        if (mainuser) {
+          setUser(mainuser);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
   return (
     <div className="App">
@@ -30,7 +50,7 @@ function App() {
             path="/profile"
             element={
               <>
-                <Profile />
+                <Profile setUser={setUser} />
                 <Navbar />
               </>
             }

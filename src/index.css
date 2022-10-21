@@ -50,16 +50,30 @@ body {
 
 .item-card {
   position: relative;
-  margin-top: 5%;
-  margin-left: 20%;
+  margin-top: 1%;
   width: 75%;
   height: 10%;
   border-radius: 5px;
   padding: 5px;
   box-sizing: border-box;
   background: rgb(138, 138, 138);
+  text-align: left;
 }
 .content-card {
  border: 5px solid rgb(138, 138, 138);
  border-radius: 20px;
 }
+
+.file-container {
+  position: relative;
+  margin-top: 1%;
+  margin-left: 10%;
+  width: 75%;
+  height: 90vh;
+  border-radius: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  display: inline-block;
+}
+
